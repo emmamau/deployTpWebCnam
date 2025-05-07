@@ -1,3 +1,5 @@
+ARG CACHEBUST=1
+
 # Étape 1 : Build Angular app
 FROM node:18 AS angular-build
 WORKDIR /app
