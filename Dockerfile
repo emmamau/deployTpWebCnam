@@ -3,7 +3,8 @@ FROM node:18 AS angular-build
 WORKDIR /app
 COPY front ./front
 WORKDIR /app/front
-RUN npm install && npm run build
+RUN npm install
+RUN npm run build
 
 # Étape 2 : Préparer le backend Node.js
 FROM node:18 AS api-build
