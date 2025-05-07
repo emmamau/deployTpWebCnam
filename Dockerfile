@@ -9,6 +9,10 @@ RUN npm install
 RUN npm run build -- --configuration production --verbose || true
 
 RUN mkdir /build
+
+DIR /app
+DIR /app/client
+DIR /app/client/dist/
 COPY /app/client/dist/tp02 /build
 
 # Étape 2 : Préparer le backend Node.js
