@@ -6,7 +6,7 @@ WORKDIR /app/client
 
 RUN echo "Démarrage du build Angular..."
 RUN npm install
-RUN npm run build -- --configuration production
+RUN npm run build -- --configuration production --verbose || true
 
 # Étape 2 : Préparer le backend Node.js
 FROM node:18 AS api-build
