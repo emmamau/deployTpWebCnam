@@ -10,8 +10,10 @@ RUN npm run build -- --configuration production --verbose
 
 RUN mkdir /build
 
-RUN ls -la /app/client/dist
-COPY /app/client/dist /build
+
+RUN ls -R /app
+
+COPY /app/client/dist/tp02 /build
 
 # Étape 2 : Préparer le backend Node.js
 FROM node:18 AS api-build
