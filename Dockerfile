@@ -8,6 +8,9 @@ RUN echo "Démarrage du build Angular...2"
 RUN npm install
 RUN npm run build -- --configuration production --verbose || true
 
+RUN mkdir /build
+COPY /app/client/dist/tp02 /build
+
 # Étape 2 : Préparer le backend Node.js
 FROM node:18 AS api-build
 WORKDIR /app
