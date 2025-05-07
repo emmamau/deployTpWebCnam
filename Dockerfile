@@ -10,7 +10,7 @@ RUN npm run build -- --configuration production --verbose
 
 RUN mkdir /build
 
-
+RUN ls -la /app/client/dist
 COPY /app/client/dist /build
 
 # Étape 2 : Préparer le backend Node.js
