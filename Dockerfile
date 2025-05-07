@@ -12,7 +12,7 @@ RUN npm run build -- --configuration production --verbose || true
 FROM node:18 AS api-build
 WORKDIR /app
 COPY api ./api
-COPY --from=angular-build /app/client/dist ./public  # copie du build Angular
+COPY --from=angular-build /app/client/dist/tp02 ./public  # copie du build Angular
 WORKDIR /app/api
 RUN npm install
 
