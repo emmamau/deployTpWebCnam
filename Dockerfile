@@ -1,7 +1,7 @@
 # Étape 1 : Build Angular app
 FROM node:18 AS angular-build
 WORKDIR /app
-COPY front ./client
+COPY client ./client
 WORKDIR /app/client
 RUN npm install
 RUN npm run build
