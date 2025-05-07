@@ -4,7 +4,7 @@ WORKDIR /app
 COPY client ./client
 WORKDIR /app/client
 RUN npm install
-RUN npm run build
+RUN npm run build -- --configuration production
 
 # Étape 2 : Préparer le backend Node.js
 FROM node:18 AS api-build
