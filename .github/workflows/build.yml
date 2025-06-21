@@ -61,6 +61,6 @@ jobs:
 
       - name: Deploy on render.com
         env:
-          deploy_url: ${{ secrets.NODEJS }}
+          deploy_url: ${{ secrets.RENDER }}
         run: |
           curl "$deploy_url"
