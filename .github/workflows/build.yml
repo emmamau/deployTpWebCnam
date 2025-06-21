@@ -59,8 +59,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Deploy on render.com
-        env:
-          deploy_url: ${{ secrets.RENDER }}
-        run: |
-          curl "$deploy_url"
+
