@@ -4,13 +4,13 @@ FROM node:20 AS builder
 
 WORKDIR /app
 
-COPY client ./client
-WORKDIR /app/client
+COPY frontCnam ./front
+WORKDIR /app/front
 
 RUN echo "Démarrage du build Angular"
 
-RUN npm install -g npm@10.8.3
-RUN npm install -g @angular/cli@18.2.6
+RUN npm install -g npm
+RUN npm install -g @angular/cli
 
 RUN npm install
 RUN ng build --configuration=production
@@ -32,7 +32,7 @@ RUN npm install
 # Étape 3 : Image finale
 FROM node:20
 WORKDIR /app
-COPY --from=builder /app/dist/* /app/public/
+COPY --from=builder /app/front/dist/* /app/public/
 COPY --from=api-build /app/api ./
 COPY --from=api-build /app/api/node_modules ./node_modules
 
