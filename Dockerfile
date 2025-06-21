@@ -32,10 +32,11 @@ RUN npm install
 # Étape 3 : Image finale
 FROM node:22.12.0
 WORKDIR /app
-COPY --from=builder /app/front/dist/* /app/public/
-COPY --from=api-build /app/api ./
-COPY --from=api-build /app/api/node_modules ./node_modules
+RUN mkdir /build
+COPY --from=builder /app/front/dist/* /app
+COPY --from=api-build /app/api ./api
+COPY --from=api-build /app/api/node_modules ./api/node_modules
 
 ENV PORT=10000
 EXPOSE 10000
-CMD ["node", "api/index.js"]
+CMD ["node", "/api/index.js"]
