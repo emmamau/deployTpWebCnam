@@ -8,10 +8,11 @@ COPY client ./client
 WORKDIR /app/client
 
 RUN echo "Démarrage du build Angular"
-RUN npm install -g @angular/cli@18.2.6
-RUN npm install
 
-RUN ls -R /app
+RUN npm install -g npm@10.8.3
+RUN npm install -g @angular/cli@18.2.6
+
+
 RUN ng build --configuration=production
 
 RUN mkdir /build
