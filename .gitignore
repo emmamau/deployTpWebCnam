@@ -5,6 +5,7 @@ dist
 /tmp
 /out-tsc
 /bazel-out
+/client/.angular/cache
 
 # Node
 node_modules
@@ -40,3 +41,5 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+client/.angular/cache/18.2.6/tp02/.tsbuildinfo
+client/.angular/cache/18.2.6/tp02/angular-compiler.db

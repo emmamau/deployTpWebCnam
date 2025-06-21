@@ -8,7 +8,7 @@ COPY client ./client
 WORKDIR /app/client
 
 RUN echo "Démarrage du build Angular...2"
-RUN npm install
+RUN npm install -g @angular/cli
 RUN ng build  --verbose 
 
 RUN mkdir /build
