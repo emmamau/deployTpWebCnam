@@ -9,12 +9,14 @@ WORKDIR /app/client
 
 RUN echo "Démarrage du build Angular...2"
 RUN npm install -g @angular/cli
-RUN ng build  --verbose 
-
-RUN mkdir /build
-
+RUN npm install
 
 RUN ls -R /app
+RUN ng build --configuration=production
+
+
+
+
 
 
 
