@@ -1,5 +1,5 @@
 # Étape 1 : Build Angular app
-FROM node:20 AS builder
+FROM node:22.12.0 AS builder
 
 
 WORKDIR /app
@@ -23,14 +23,14 @@ RUN mkdir /build
 
 
 # Étape 2 : Préparer le backend Node.js
-FROM node:20 AS api-build
+FROM node:22.12.0 AS api-build
 WORKDIR /app
 COPY api ./api
 WORKDIR /app/api
 RUN npm install
 
 # Étape 3 : Image finale
-FROM node:20
+FROM node:22.12.0
 WORKDIR /app
 COPY --from=builder /app/front/dist/* /app/public/
 COPY --from=api-build /app/api ./
@@ -38,4 +38,4 @@ COPY --from=api-build /app/api/node_modules ./node_modules
 
 ENV PORT=10000
 EXPOSE 10000
-CMD ["node", "index.js"]
+CMD ["node", "api/index.js"]
