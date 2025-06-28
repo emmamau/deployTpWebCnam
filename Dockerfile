@@ -5,7 +5,7 @@ FROM node:20 AS build
 WORKDIR /app
 
 # Copier uniquement le dossier front
-COPY front/ ./front/
+COPY frontCnam/ ./front/
 
 # Aller dans le répertoire front pour installer les dépendances
 WORKDIR /app/front
