@@ -5,10 +5,10 @@ FROM node:20 AS build
 WORKDIR /app
 
 # Copier uniquement le dossier front
-COPY frontCnam/ ./front/
+COPY frontCnam/ ./frontCnam/
 
 # Aller dans le répertoire front pour installer les dépendances
-WORKDIR /app/front
+WORKDIR /app/frontCnam
 
 # Installer Angular CLI et les dépendances
 RUN npm install -g @angular/cli && npm install
@@ -19,8 +19,8 @@ RUN ng build --configuration=production
 # Étape 2 : Servir avec NGINX
 FROM nginx:alpine
 
-# Copier le build Angular depuis /app/front/dist vers NGINX
-COPY --from=build /app/front/dist/ /usr/share/nginx/html
+# Copier le build Angular depuis /app/frontCnam/dist vers NGINX
+COPY --from=build /app/frontCnam/dist/frontCnam /usr/share/nginx/html
 
 # Si vous avez une conf NGINX pour gérer le routing Angular :
 # COPY nginx.conf /etc/nginx/nginx.conf
