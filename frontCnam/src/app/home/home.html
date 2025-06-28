@@ -1,0 +1,29 @@
+Bonjour {{login}}
+
+<form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+  <div>
+    <label for="login">login :</label>
+    <input
+      type="text"
+      id="login"
+      name="login"
+      [(ngModel)]="login"
+      required
+    />
+  </div>
+
+  <div>
+    <label for="password">Password :</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="password"
+      required
+    />
+  </div>
+
+  <button type="submit" [disabled]="!loginForm.form.valid">
+    Se connecter
+  </button>
+</form>
