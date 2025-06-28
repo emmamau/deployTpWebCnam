@@ -1,42 +1,29 @@
-# Étape 1 : Build Angular app
-FROM node:22.12.0 AS builder
+# Étape 1 : Build de l'application Angular
+FROM node:20 AS build
 
-
+# Définir le répertoire de travail
 WORKDIR /app
 
-COPY frontCnam ./front
-WORKDIR /app/front
+# Copier package.json et package-lock.json
+COPY package*.json ./
 
-RUN echo "Démarrage du build Angular"
+# Installer les dépendances
+RUN npm install -g @angular/cli && npm install
 
-RUN npm install -g npm
-RUN npm install -g @angular/cli
+# Copier le reste du code source
+COPY . .
 
-RUN npm install
+# Compiler l'application Angular
 RUN ng build --configuration=production
 
-RUN mkdir /build
+# Étape 2 : Servir les fichiers compilés avec NGINX
+FROM nginx:alpine
 
+# Copier la build Angular dans le dossier NGINX par défaut
+COPY --from=build /app/dist/ /usr/share/nginx/html
 
+# Copier une configuration NGINX personnalisée (optionnel)
+# COPY nginx.conf /etc/nginx/nginx.conf
 
-
-
-
-# Étape 2 : Préparer le backend Node.js
-FROM node:22.12.0 AS api-build
-WORKDIR /app
-COPY api ./api
-WORKDIR /app/api
-RUN npm install
-
-# Étape 3 : Image finale
-FROM node:22.12.0
-WORKDIR /app
-RUN mkdir /build
-COPY --from=builder /app/front/dist/* /app
-COPY --from=api-build /app/api ./api
-COPY --from=api-build /app/api/node_modules ./api/node_modules
-
-ENV PORT=10000
-EXPOSE 10000
-CMD ["node", "/api/index.js"]
+# Exposer le port HTTP par défaut
+EXPOSE 80
