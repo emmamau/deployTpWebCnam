@@ -15,8 +15,7 @@ RUN npm install -g @angular/cli && npm install
 
 # Build de l'application
 RUN ng build --configuration=production
-
-DIR /app/frontCnam/dist
+RUN ls -al ./frontCnam
 
 # Étape 2 : Servir avec NGINX
 FROM nginx:alpine
