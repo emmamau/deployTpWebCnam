@@ -1,29 +1,32 @@
-# Étape 1 : Build de l'application Angular
+# Étape 1 : Build de l'application Angular dans le dossier /front
 FROM node:20 AS build
 
-# Définir le répertoire de travail
+# Définir le répertoire de travail dans /app/front
 WORKDIR /app
 
-# Copier package.json et package-lock.json
-COPY package*.json ./
+# Copier uniquement le dossier front
+COPY front/ ./front/
 
-# Installer les dépendances
+# Aller dans le répertoire front pour installer les dépendances
+WORKDIR /app/front
+
+# Installer Angular CLI et les dépendances
 RUN npm install -g @angular/cli && npm install
 
-# Copier le reste du code source
-COPY . .
-
-# Compiler l'application Angular
+# Build de l'application
 RUN ng build --configuration=production
 
-# Étape 2 : Servir les fichiers compilés avec NGINX
+# Étape 2 : Servir avec NGINX
 FROM nginx:alpine
 
-# Copier la build Angular dans le dossier NGINX par défaut
-COPY --from=build /app/dist/ /usr/share/nginx/html
+# Copier le build Angular depuis /app/front/dist vers NGINX
+COPY --from=build /app/front/dist/ /usr/share/nginx/html
 
-# Copier une configuration NGINX personnalisée (optionnel)
+# Si vous avez une conf NGINX pour gérer le routing Angular :
 # COPY nginx.conf /etc/nginx/nginx.conf
 
-# Exposer le port HTTP par défaut
+# Exposer le port
 EXPOSE 80
+
+# Commande de démarrage
+CMD ["nginx", "-g", "daemon off;"]
