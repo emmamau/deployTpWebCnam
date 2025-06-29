@@ -20,6 +20,9 @@ RUN ng build --configuration=production
 # Étape 2 : Servir avec NGINX
 FROM nginx:alpine
 
+
+RUN rm -rf /usr/share/nginx/html/*
+
 # Copier le build Angular depuis /app/frontCnam/dist vers NGINX
 COPY --from=build /app/frontCnam/dist/frontCnam /usr/share/nginx/html
 
