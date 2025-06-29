@@ -27,7 +27,7 @@ COPY --from=build /app/frontCnam/dist /usr/share/nginx/html
 # COPY nginx.conf /etc/nginx/nginx.conf
 
 
-RUN ls -al
+RUN ls -al /usr/share/nginx/html
 # Exposer le port
 EXPOSE 80
 
