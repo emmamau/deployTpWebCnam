@@ -28,6 +28,9 @@ COPY --from=build /app/frontCnam/dist/frontCnam /usr/share/nginx/html
 
 
 RUN ls -al /usr/share/nginx/html
+
+RUN cat index.html
+
 # Exposer le port
 EXPOSE 80
 
