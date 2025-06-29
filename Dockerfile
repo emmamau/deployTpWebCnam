@@ -15,7 +15,7 @@ RUN npm install -g @angular/cli && npm install
 
 # Build de l'application
 RUN ng build --configuration=production
-RUN ls -al 
+RUN ls -al ./dist
 
 # Étape 2 : Servir avec NGINX
 FROM nginx:alpine
@@ -26,6 +26,8 @@ COPY --from=build /app/frontCnam/dist /usr/share/nginx/html
 # Si vous avez une conf NGINX pour gérer le routing Angular :
 # COPY nginx.conf /etc/nginx/nginx.conf
 
+
+RUN ls -al
 # Exposer le port
 EXPOSE 80
 
